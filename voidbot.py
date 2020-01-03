@@ -1,4 +1,4 @@
-#bot.py
+#bot.py #replace input() with message
 import os
 import discord
 
@@ -31,8 +31,10 @@ async def on_message(message):
     if message.content == 'kevin':
         response = 'go kevi go kevi'
         await message.channel.send(response)
-    if message.content == '!slice':
-        response = 'https://tenor.com/view/kimetsu-no-yaiba-zenitsu-demon-slayer-lightning-breathing-iai-gif-14394969'
+    if message.content.lower().startswith('!slice'):
+        user = message.content[len('!slice'):]
+        text = ' ' '
+        response = 'https://tenor.com/view/kimetsu-no-yaiba-zenitsu-demon-slayer-lightning-breathing-iai-gif-14394969 \nthis is totally me when i''m slicing ' + str(user) +  + ' head off'
         await message.channel.send(response)
 client.run(token)
 
