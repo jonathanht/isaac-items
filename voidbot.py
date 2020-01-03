@@ -33,8 +33,7 @@ async def on_message(message):
         await message.channel.send(response)
     if message.content.lower().startswith('!slice'):
         user = message.content[len('!slice'):]
-        text = ' ' '
-        response = 'https://tenor.com/view/kimetsu-no-yaiba-zenitsu-demon-slayer-lightning-breathing-iai-gif-14394969 \nthis is totally me when i''m slicing ' + str(user) +  + ' head off'
+        response = 'https://tenor.com/view/kimetsu-no-yaiba-zenitsu-demon-slayer-lightning-breathing-iai-gif-14394969 \nthis is totally me when i''m slicing ' + str(user) + ' head off'
         await message.channel.send(response)
 client.run(token)
 
