@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-token="NjYyNDMwMjYzMTExOTc0OTIz.Xg6QZg._4V_ft5K478YsDyHk_HAuytxyUQ"
+
 
 client = discord.Client()
 
@@ -35,5 +35,5 @@ async def on_message(message):
         user = message.content[len('!slice'):]
         response = 'https://tenor.com/view/kimetsu-no-yaiba-zenitsu-demon-slayer-lightning-breathing-iai-gif-14394969 \nthis is totally me when i''m slicing ' + str(user) + ' head off'
         await message.channel.send(response)
-client.run(token)
+client.run("INSERT BOT TOKEN HERE")
 
