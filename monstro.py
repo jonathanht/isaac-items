@@ -1,14 +1,36 @@
 #bot.py #replace input() with message
-import os
-import discord
+import os, discord, bs4, requests
 
+
+from discord.ext import commands
 from dotenv import load_dotenv
 load_dotenv()
 
+client = commands.Bot(command_prefix = '!')
 
 
 
-client = discord.Client()
+@client.command(pass_context = True)
+async def bday(ctx, char):
+    res = requests.get('https://stardewvalley.wiki.com/' + char.lower())
+    res.raise_for_status()
+    soup = bs4.BeautifulSoup(res.txt, 'html.parser')
+    elems = soup.select('#infoboxdetail')
+    birthday = elems[0].text.strip()
+    
+
+    await ctx.send(char.lower() + " 's birthday is on: " + birthday)
+
+
+
+@client.command(pass_context = True)
+async def ping(ctx, message):
+    await ctx.send(message)
+
+
+@client.command(pass_context = True)
+async def slice(ctx, person):
+    await ctx.send("https://tenor.com/view/kimetsu-no-yaiba-zenitsu-demon-slayer-lightning-breathing-iai-gif-14394969 \nthis is totally me when i'm slicing " + person + "'s head off")
 
 
 @client.event
@@ -19,21 +41,5 @@ async def on_ready():
 
 
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
 
-    if message.content == 'daniel':
-        response = 'is the best in the game'
-        await message.channel.send(response)
-
-    if message.content == 'kevin':
-        response = 'go kevi go kevi'
-        await message.channel.send(response)
-    if message.content.lower().startswith('!slice'):
-        user = message.content[len('!slice'):]
-        response = 'https://tenor.com/view/kimetsu-no-yaiba-zenitsu-demon-slayer-lightning-breathing-iai-gif-14394969 \nthis is totally me when i''m slicing ' + str(user) + ' head off'
-        await message.channel.send(response)
 client.run("INSERT BOT TOKEN HERE")
-
