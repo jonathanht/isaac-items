@@ -14,7 +14,7 @@ client = commands.Bot(command_prefix = '!')
 async def bday(ctx, char):
     res = requests.get('https://stardewvalley.wiki.com/' + char.lower())
     res.raise_for_status()
-    soup = bs4.BeautifulSoup(res.txt, 'html.parser')
+    soup = bs4.BeautifulSoup(res.text, 'html.parser')
     elems = soup.select('#infoboxdetail')
     birthday = elems[0].text.strip()
     
@@ -23,9 +23,6 @@ async def bday(ctx, char):
 
 
 
-@client.command(pass_context = True)
-async def ping(ctx, message):
-    await ctx.send(message)
 
 
 @client.command(pass_context = True)
