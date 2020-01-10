@@ -33,13 +33,22 @@ async def ping(ctx, message):
 async def slice(ctx, person):
     await ctx.send("https://tenor.com/view/kimetsu-no-yaiba-zenitsu-demon-slayer-lightning-breathing-iai-gif-14394969 \nthis is totally me when i'm slicing " + person + "'s head off")
 
+@client.command(pass_context = True)
+async def item(ctx, char):
+    entryName = char
+    
+    res = requests.get('https://bindingofisaacrebirth.gamepedia.com/' +  entryName)
+    res.raise_for_status()
+    soup = bs4.BeautifulSoup(res.text, 'html.parser')
 
+    elems = soup.select('#mw-content-text > div > ul:nth-child(5) > li:nth-child(1)')
+
+    await ctx.send('***' + entryName + '***\n' + '```' + elems[0].text.strip() + '```')
 
 
 @client.event
 async def on_ready():
 	print(f'{client.user} has connected to Discord!')
 
-	
-	
-client.run(BOT TOKEN HERE) 
+
+client.run('insert key') 
