@@ -25,8 +25,45 @@ async def bday(ctx, char):
 
 
 @client.command(pass_context = True)
-async def ping(ctx, message):
-    await ctx.send(message)
+async def tenman(ctx, *args):
+    #Create list of players according to args
+    players = [item for item in args]
+    
+    #Create lists with placeholder values "None"
+    team1 = [None] * 5
+    team2 = [None] * 5
+
+    pos = 0
+    while pos < 5:
+        rand = random.randint(0,9)
+    
+        if(players[rand] == "chosen") :
+            while(players[rand] == "chosen"):
+                rand = random.randint(0,9)
+            team1[pos] = players[rand]
+
+
+        team1[pos] = players[rand]
+        players[rand] = "chosen"
+        pos = pos + 1
+
+
+
+    for i in range(10):
+        if(players[i] != "chosen"):
+            position = 0
+            team2.insert(position, players[i])
+            position = position + 1
+    for i in range(5):
+        del team2[5]
+
+    await ctx.send("Team 1: ")
+    await ctx.send(team1)
+    await ctx.send("Team 2: ")
+    await ctx.send(team2)
+
+
+
 
 
 @client.command(pass_context = True)
