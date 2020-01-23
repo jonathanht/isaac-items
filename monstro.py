@@ -33,10 +33,12 @@ async def tenman(ctx, *args):
     team1 = [None] * 5
     team2 = [None] * 5
 
+    #Chooses random players from player list to add into Team 1 list	
     pos = 0
     while pos < 5:
         rand = random.randint(0,9)
-    
+    	
+	#Only add elements from index players that are not marked as already "chosen"
         if(players[rand] == "chosen") :
             while(players[rand] == "chosen"):
                 rand = random.randint(0,9)
@@ -44,24 +46,30 @@ async def tenman(ctx, *args):
 
 
         team1[pos] = players[rand]
+	
+	#If the player in the list has been chosen already, replace with string "chosen"
         players[rand] = "chosen"
         pos = pos + 1
 
 
-
+    #Adds remaining players into Team 2 
     for i in range(10):
         if(players[i] != "chosen"):
             position = 0
             team2.insert(position, players[i])
             position = position + 1
+    #Remove placeholder values in indexes
     for i in range(5):
         del team2[5]
-
-    await ctx.send("Team 1: ")
-    await ctx.send(team1)
-    await ctx.send("Team 2: ")
-    await ctx.send(team2)
-
+	
+    #Convert lists to respective strings
+    finalTeam1 = ', '.join(team1)
+    finalTeam2 = ', '.join(team2)
+    
+    #Print both teams with discord formatting
+    await ctx.send("``` Team 1: " + finalTeam1 + "```")
+    await ctx.send("``` Team 2: " + finalTeam2 + "```")
+    
 
 
 
